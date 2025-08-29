@@ -30,8 +30,8 @@ export default function Testimonials() {
     <section className="py-20 bg-muted" data-testid="testimonials-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4" data-testid="testimonials-title">
-            Stories of Hope
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-4" data-testid="testimonials-title">
+            <span className="font-script text-primary">Inspiring</span> Stories of Hope
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="testimonials-subtitle">
             Real stories from real people whose lives have been transformed through our programs.

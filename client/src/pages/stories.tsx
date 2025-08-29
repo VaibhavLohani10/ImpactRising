@@ -61,8 +61,8 @@ export default function Stories() {
       {/* Hero Section */}
       <section className="py-20 bg-muted" data-testid="stories-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="stories-title">
-            Stories & Updates
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6" data-testid="stories-title">
+            <span className="font-script text-primary">Inspiring</span> Stories & Updates
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="stories-subtitle">
             Stay updated with our latest activities, impact stories, and community events.

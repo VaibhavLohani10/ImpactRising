@@ -62,8 +62,8 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="py-20 bg-muted" data-testid="contact-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="contact-title">
-            Contact Us
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6" data-testid="contact-title">
+            <span className="font-script text-primary">Connect</span> With Us
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="contact-subtitle">
             Have questions or want to learn more about our work? We'd love to hear from you.

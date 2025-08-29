@@ -109,8 +109,8 @@ export default function GetInvolved() {
       {/* Hero Section */}
       <section className="py-20 bg-muted" data-testid="involvement-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="involvement-title">
-            Get Involved
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6" data-testid="involvement-title">
+            <span className="font-script text-primary">Join</span> Our Mission
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="involvement-subtitle">
             Join us in creating lasting change. Every contribution, big or small, 
@@ -141,7 +141,7 @@ export default function GetInvolved() {
                 <div className="grid grid-cols-3 gap-3">
                   <Button
                     variant="outline"
-                    className="p-3 h-auto flex flex-col hover:border-secondary hover:bg-secondary/5"
+                    className="p-3 h-auto flex flex-col hover:border-secondary hover:bg-secondary/5 donate-button"
                     onClick={() => handleDonation(500)}
                     data-testid="donation-button-500"
                   >
@@ -150,7 +150,7 @@ export default function GetInvolved() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="p-3 h-auto flex flex-col hover:border-secondary hover:bg-secondary/5"
+                    className="p-3 h-auto flex flex-col hover:border-secondary hover:bg-secondary/5 donate-button"
                     onClick={() => handleDonation(2000)}
                     data-testid="donation-button-2000"
                   >
@@ -159,7 +159,7 @@ export default function GetInvolved() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="p-3 h-auto flex flex-col hover:border-secondary hover:bg-secondary/5"
+                    className="p-3 h-auto flex flex-col hover:border-secondary hover:bg-secondary/5 donate-button"
                     onClick={() => handleDonation(5000)}
                     data-testid="donation-button-5000"
                   >

@@ -27,7 +27,7 @@ export default function Navigation() {
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">S</span>
             </div>
-            <span className="text-xl font-bold text-foreground">Seva Foundation</span>
+            <span className="text-xl font-script font-bold text-foreground">Seva Foundation</span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -58,7 +58,7 @@ export default function Navigation() {
               </Link>
               <Link href="/get-involved">
                 <Button
-                  className="bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary/90 donate-button"
                   data-testid="button-donate"
                 >
                   Donate Now
@@ -114,7 +114,7 @@ export default function Navigation() {
               </Link>
               <Link href="/get-involved">
                 <Button
-                  className="w-full bg-secondary text-secondary-foreground"
+                  className="w-full bg-secondary text-secondary-foreground donate-button"
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid="mobile-button-donate"
                 >

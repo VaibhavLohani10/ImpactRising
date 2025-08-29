@@ -1,13 +1,19 @@
 import { Link } from "wouter";
 import { BookOpen, Briefcase, Heart, Leaf } from "lucide-react";
 
+// Import generated images
+import educationImage from "@/assets/images/Indian_children_education_classroom_08abf146.png";
+import womenImage from "@/assets/images/Women_empowerment_skills_training_0151b0f5.png";
+import spiritualImage from "@/assets/images/Spiritual_meditation_yoga_session_8df56b6b.png";
+import environmentImage from "@/assets/images/Environmental_tree_plantation_drive_82f866c6.png";
+
 export default function PillarsSection() {
   const pillars = [
     {
       icon: BookOpen,
       title: "Holistic Education",
       description: "💫 Nurturing young minds with quality education, scholarships, and after-school programs. Every child deserves the chance to dream and achieve greatness.",
-      image: "/attached_assets/generated_images/Indian_children_education_classroom_08abf146.png",
+      image: educationImage,
       alt: "Children in education program",
       color: "primary",
       link: "/our-work#education",
@@ -17,7 +23,7 @@ export default function PillarsSection() {
       icon: Briefcase,
       title: "Women Empowerment",
       description: "🌟 Empowering women through skills training, employment opportunities, and small business support. Together, we're building a generation of independent, confident women leaders.",
-      image: "/attached_assets/generated_images/Women_empowerment_skills_training_0151b0f5.png",
+      image: womenImage,
       alt: "Women empowerment program",
       color: "secondary",
       link: "/our-work#empowerment",
@@ -27,7 +33,7 @@ export default function PillarsSection() {
       icon: Heart,
       title: "Spiritual Growth",
       description: "🕉️ Discovering inner peace through Vedantic teachings, meditation workshops, and spiritual guidance. Ancient wisdom for modern times, nurturing the soul alongside the mind.",
-      image: "/attached_assets/generated_images/Spiritual_meditation_yoga_session_8df56b6b.png",
+      image: spiritualImage,
       alt: "Spiritual and meditation practices",
       color: "accent",
       link: "/our-work#spirituality",
@@ -37,7 +43,7 @@ export default function PillarsSection() {
       icon: Leaf,
       title: "Environmental Care",
       description: "🌱 Protecting Mother Earth through tree plantation drives, plastic-free initiatives, and environmental awareness. Creating a sustainable future for generations to come.",
-      image: "/attached_assets/generated_images/Environmental_tree_plantation_drive_82f866c6.png",
+      image: environmentImage,
       alt: "Environmental protection activities",
       color: "green-500",
       link: "/our-work#environment",
@@ -49,8 +55,8 @@ export default function PillarsSection() {
     <section className="py-20 bg-muted" data-testid="pillars-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4" data-testid="pillars-title">
-            Our Four Pillars
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-4" data-testid="pillars-title">
+            Our <span className="font-script text-primary">Sacred</span> Four Pillars
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="pillars-subtitle">
             Each pillar represents a fundamental aspect of holistic development, 

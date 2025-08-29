@@ -1,4 +1,4 @@
-import HeroSection from "@/components/hero-section";
+import ImageSlideshow from "@/components/image-slideshow";
 import PillarsSection from "@/components/pillars-section";
 import ImpactStatistics from "@/components/impact-statistics";
 import Testimonials from "@/components/testimonials";
@@ -7,18 +7,18 @@ import { Link } from "wouter";
 export default function Home() {
   return (
     <div className="min-h-screen" data-testid="home-page">
-      <HeroSection />
+      <ImageSlideshow />
       
       {/* Mission Section */}
       <section className="py-16 bg-card" data-testid="mission-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6" data-testid="mission-title">
-            Our Mission
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-6" data-testid="mission-title">
+            Our <span className="font-script text-primary">Sacred</span> Mission
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-8" data-testid="mission-description">
-            We believe in the transformative power of holistic development. Through education, empowerment, 
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed mb-8 font-serif" data-testid="mission-description">
+            We believe in the transformative power of <em>holistic development</em>. Through education, empowerment, 
             spirituality, and environmental consciousness, we're creating sustainable change in communities 
-            across India.
+            across India. 🇮🇳 <span className="font-script text-primary text-2xl">Vasudhaiva Kutumbakam</span> - The world is one family.
           </p>
           <Link href="/about">
             <span className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium cursor-pointer" data-testid="link-read-story">

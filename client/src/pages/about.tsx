@@ -15,8 +15,8 @@ export default function About() {
       {/* Hero Section */}
       <section className="py-20 bg-muted" data-testid="about-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="about-title">
-            About Seva Foundation
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6" data-testid="about-title">
+            About <span className="font-script text-primary">Seva</span> Foundation
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="about-subtitle">
             Founded in 2015, we emerged from a simple belief: that sustainable change comes through holistic development.

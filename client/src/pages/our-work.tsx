@@ -73,8 +73,8 @@ export default function OurWork() {
       {/* Hero Section */}
       <section className="py-20 bg-muted" data-testid="work-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6" data-testid="work-title">
-            Our Work
+          <h1 className="text-4xl sm:text-5xl font-display font-bold text-foreground mb-6" data-testid="work-title">
+            Our <span className="font-script text-primary">Noble</span> Work
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto" data-testid="work-subtitle">
             Discover our comprehensive programs designed to create lasting change through holistic development.
