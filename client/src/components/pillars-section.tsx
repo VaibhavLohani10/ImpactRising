@@ -6,38 +6,42 @@ export default function PillarsSection() {
     {
       icon: BookOpen,
       title: "Holistic Education",
-      description: "Providing quality education, scholarships, and after-school programs to children who need it most.",
-      image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200",
+      description: "💫 Nurturing young minds with quality education, scholarships, and after-school programs. Every child deserves the chance to dream and achieve greatness.",
+      image: "/attached_assets/generated_images/Indian_children_education_classroom_08abf146.png",
       alt: "Children in education program",
       color: "primary",
-      link: "/our-work#education"
+      link: "/our-work#education",
+      stats: "2,500+ children educated"
     },
     {
       icon: Briefcase,
       title: "Women Empowerment",
-      description: "Skills training, employment opportunities, and small business support for women seeking independence.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200",
+      description: "🌟 Empowering women through skills training, employment opportunities, and small business support. Together, we're building a generation of independent, confident women leaders.",
+      image: "/attached_assets/generated_images/Women_empowerment_skills_training_0151b0f5.png",
       alt: "Women empowerment program",
       color: "secondary",
-      link: "/our-work#empowerment"
+      link: "/our-work#empowerment",
+      stats: "1,200+ women trained"
     },
     {
       icon: Heart,
       title: "Spiritual Growth",
-      description: "Vedantic teachings, meditation workshops, and spiritual guidance for inner peace and personal growth.",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200",
+      description: "🕉️ Discovering inner peace through Vedantic teachings, meditation workshops, and spiritual guidance. Ancient wisdom for modern times, nurturing the soul alongside the mind.",
+      image: "/attached_assets/generated_images/Spiritual_meditation_yoga_session_8df56b6b.png",
       alt: "Spiritual and meditation practices",
       color: "accent",
-      link: "/our-work#spirituality"
+      link: "/our-work#spirituality",
+      stats: "10,000+ lives touched"
     },
     {
       icon: Leaf,
       title: "Environmental Care",
-      description: "Tree plantation drives, plastic-free initiatives, and environmental awareness for a sustainable future.",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200",
+      description: "🌱 Protecting Mother Earth through tree plantation drives, plastic-free initiatives, and environmental awareness. Creating a sustainable future for generations to come.",
+      image: "/attached_assets/generated_images/Environmental_tree_plantation_drive_82f866c6.png",
       alt: "Environmental protection activities",
       color: "green-500",
-      link: "/our-work#environment"
+      link: "/our-work#environment",
+      stats: "15,000+ trees planted"
     }
   ];
 
@@ -60,19 +64,25 @@ export default function PillarsSection() {
             return (
               <div
                 key={index}
-                className="bg-card rounded-xl p-8 text-center hover:shadow-lg transition-all duration-300 group"
+                className="bg-card rounded-xl p-8 text-center hover:shadow-xl transition-all duration-500 group hover-lift transform hover:scale-105 border-2 border-transparent hover:border-primary/20"
                 data-testid={`pillar-${pillar.title.toLowerCase().replace(" ", "-")}`}
               >
-                <div className={`w-16 h-16 bg-${pillar.color}/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-${pillar.color}/20 transition-colors`}>
-                  <IconComponent className={`w-8 h-8 text-${pillar.color}`} />
+                <div className={`w-16 h-16 bg-${pillar.color}/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-${pillar.color}/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                  <IconComponent className={`w-8 h-8 text-${pillar.color} group-hover:scale-125 transition-transform duration-300`} />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-4">{pillar.title}</h3>
                 <p className="text-muted-foreground mb-6">{pillar.description}</p>
-                <img
-                  src={pillar.image}
-                  alt={pillar.alt}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
+                <div className="relative overflow-hidden rounded-lg mb-4 group-hover:shadow-xl transition-all duration-300">
+                  <img
+                    src={pillar.image}
+                    alt={pillar.alt}
+                    className="w-full h-40 object-cover transform group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-2 left-2 text-white text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {pillar.stats}
+                  </div>
+                </div>
                 <Link href={pillar.link}>
                   <span className={`text-${pillar.color} hover:text-${pillar.color}/80 font-medium cursor-pointer`} data-testid={`link-learn-more-${index}`}>
                     Learn More →

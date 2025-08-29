@@ -5,21 +5,24 @@ export default function Testimonials() {
       role: "Engineering Student",
       image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
       alt: "Priya, education program beneficiary",
-      quote: "The scholarship program helped me complete my studies. Now I'm studying engineering and want to help other children like me."
+      quote: "✨ The scholarship program was a turning point in my life! Today I'm studying engineering and determined to give back. Education truly transforms dreams into reality.",
+      emoji: "🎓"
     },
     {
       name: "Sunita Devi",
-      role: "Small Business Owner",
+      role: "Successful Entrepreneur",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
       alt: "Sunita, women empowerment program graduate",
-      quote: "The skills training program gave me confidence to start my own tailoring business. I now employ three other women."
+      quote: "🌟 From hesitant learner to confident businesswoman! The skills training didn't just teach me tailoring - it gave me wings. I now employ 5 women and we're thriving together!",
+      emoji: "👩‍💼"
     },
     {
       name: "Rajesh Kumar",
-      role: "Volunteer & Teacher",
+      role: "Community Leader & Volunteer",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
       alt: "Rajesh, spiritual program participant",
-      quote: "The Vedanta workshops helped me find inner peace during difficult times. Now I volunteer to share this wisdom with others."
+      quote: "🙏 The Vedanta teachings brought clarity to my life during turbulent times. Now I'm committed to sharing this ancient wisdom with others who need hope and guidance.",
+      emoji: "🕉️"
     }
   ];
 
@@ -39,15 +42,20 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-card rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-card rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 hover-lift transform hover:scale-105 border border-transparent hover:border-primary/20"
               data-testid={`testimonial-${index}`}
             >
-              <img
-                src={testimonial.image}
-                alt={testimonial.alt}
-                className="w-20 h-20 rounded-full object-cover mx-auto mb-6"
-                data-testid={`testimonial-image-${index}`}
-              />
+              <div className="relative mx-auto mb-6 w-20 h-20">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.alt}
+                  className="w-20 h-20 rounded-full object-cover ring-4 ring-primary/20 hover:ring-primary/40 transition-all duration-300"
+                  data-testid={`testimonial-image-${index}`}
+                />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm">
+                  {testimonial.emoji}
+                </div>
+              </div>
               <blockquote className="text-muted-foreground italic mb-6 text-center" data-testid={`testimonial-quote-${index}`}>
                 "{testimonial.quote}"
               </blockquote>
