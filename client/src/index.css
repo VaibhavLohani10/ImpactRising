@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(120, 10%, 98%);
+  --foreground: hsl(240, 10%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 15%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 15%);
+  --primary: hsl(142, 71%, 45%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(43, 96%, 56%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(120, 6%, 94%);
+  --muted-foreground: hsl(240, 4%, 46%);
+  --accent: hsl(217, 91%, 60%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(120, 6%, 90%);
+  --input: hsl(120, 6%, 90%);
+  --ring: hsl(142, 71%, 45%);
+  --radius: 12px;
+  --font-sans: "Inter", sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --shadow-2xs: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00), 0px 1px 2px -1px hsl(142, 71%, 45% / 0.00);
+  --shadow: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00), 0px 1px 2px -1px hsl(142, 71%, 45% / 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00), 0px 2px 4px -1px hsl(142, 71%, 45% / 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00), 0px 4px 6px -1px hsl(142, 71%, 45% / 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00), 0px 8px 10px -1px hsl(142, 71%, 45% / 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(142, 71%, 45% / 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+  --green-500: hsl(142, 71%, 45%);
+  --orange-500: hsl(43, 96%, 56%);
+  --blue-500: hsl(217, 91%, 60%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 8%);
+  --foreground: hsl(0, 0%, 95%);
+  --card: hsl(240, 10%, 12%);
+  --card-foreground: hsl(0, 0%, 95%);
+  --popover: hsl(240, 10%, 12%);
+  --popover-foreground: hsl(0, 0%, 95%);
+  --primary: hsl(142, 71%, 45%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(43, 96%, 56%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(240, 4%, 16%);
+  --muted-foreground: hsl(240, 5%, 65%);
+  --accent: hsl(217, 91%, 60%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --border: hsl(240, 6%, 20%);
+  --input: hsl(240, 6%, 20%);
+  --ring: hsl(142, 71%, 45%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(135deg, hsl(142, 71%, 45% / 0.1) 0%, hsl(43, 96%, 56% / 0.1) 100%);
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
