@@ -46,6 +46,23 @@ export const newsletters = pgTable("newsletters", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const blogPosts = pgTable("blog_posts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  slug: text("slug").notNull().unique(),
+  content: text("content").notNull(),
+  excerpt: text("excerpt"),
+  authorName: text("author_name").notNull(),
+  authorEmail: text("author_email").notNull(),
+  status: text("status").notNull().default("pending"), // pending, published, rejected
+  category: text("category").default("general"),
+  featuredImage: text("featured_image"),
+  tags: text("tags").array(),
+  viewCount: integer("view_count").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -78,6 +95,26 @@ export const insertNewsletterSchema = createInsertSchema(newsletters).pick({
   email: true,
 });
 
+export const insertBlogPostSchema = createInsertSchema(blogPosts).pick({
+  title: true,
+  content: true,
+  excerpt: true,
+  authorName: true,
+  authorEmail: true,
+  category: true,
+  featuredImage: true,
+  tags: true,
+}).extend({
+  title: z.string().min(5, "Title must be at least 5 characters"),
+  content: z.string().min(100, "Content must be at least 100 characters"),
+  authorName: z.string().min(2, "Author name is required"),
+  authorEmail: z.string().email("Valid email is required"),
+  excerpt: z.string().optional(),
+  category: z.string().optional(),
+  featuredImage: z.string().url().optional().or(z.literal("")),
+  tags: z.array(z.string()).optional(),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertContact = z.infer<typeof insertContactSchema>;
@@ -88,3 +125,5 @@ export type InsertDonation = z.infer<typeof insertDonationSchema>;
 export type Donation = typeof donations.$inferSelect;
 export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;
 export type Newsletter = typeof newsletters.$inferSelect;
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type BlogPost = typeof blogPosts.$inferSelect;

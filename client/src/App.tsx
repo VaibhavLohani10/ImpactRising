@@ -12,6 +12,10 @@ import OurWork from "@/pages/our-work";
 import GetInvolved from "@/pages/get-involved";
 import Stories from "@/pages/stories";
 import Contact from "@/pages/contact";
+import Blog from "@/pages/blog";
+import BlogDetail from "@/pages/blog-detail";
+import BlogSubmit from "@/pages/blog-submit";
+import AdminBlogs from "@/pages/admin-blogs";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +28,10 @@ function Router() {
         <Route path="/our-work" component={OurWork} />
         <Route path="/get-involved" component={GetInvolved} />
         <Route path="/stories" component={Stories} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogDetail} />
+        <Route path="/blog/submit" component={BlogSubmit} />
+        <Route path="/admin/blogs" component={AdminBlogs} />
         <Route path="/contact" component={Contact} />
         <Route component={NotFound} />
       </Switch>

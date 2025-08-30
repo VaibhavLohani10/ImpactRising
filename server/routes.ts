@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertVolunteerSchema, insertDonationSchema, insertNewsletterSchema } from "@shared/schema";
+import { insertContactSchema, insertVolunteerSchema, insertDonationSchema, insertNewsletterSchema, insertBlogPostSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
@@ -60,6 +60,141 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ success: true, newsletter });
     } catch (error) {
       res.status(400).json({ success: false, error: "Invalid email address" });
+    }
+  });
+
+  // =================== BLOG ENDPOINTS ===================
+  
+  // Create new blog post (public submission)
+  app.post("/api/blogs", async (req, res) => {
+    try {
+      const validatedData = insertBlogPostSchema.parse(req.body);
+      const blogPost = await storage.createBlogPost(validatedData);
+      res.json({ 
+        success: true, 
+        blogPost,
+        message: "Your blog post has been submitted for review. We'll publish it after approval."
+      });
+    } catch (error) {
+      console.error("Blog creation error:", error);
+      res.status(400).json({ success: false, error: "Invalid blog post data" });
+    }
+  });
+
+  // Get all published blog posts
+  app.get("/api/blogs", async (req, res) => {
+    try {
+      const blogPosts = await storage.getBlogPosts("published");
+      res.json({ success: true, blogPosts });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to fetch blog posts" });
+    }
+  });
+
+  // Get single blog post by ID
+  app.get("/api/blogs/:id", async (req, res) => {
+    try {
+      const blogPost = await storage.getBlogPost(req.params.id);
+      if (!blogPost) {
+        return res.status(404).json({ success: false, error: "Blog post not found" });
+      }
+      
+      // Increment view count for published posts
+      if (blogPost.status === "published") {
+        await storage.updateBlogPost(req.params.id, { viewCount: (blogPost.viewCount || 0) + 1 });
+      }
+      
+      res.json({ success: true, blogPost });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to fetch blog post" });
+    }
+  });
+
+  // Get blog post by slug (SEO friendly URLs)
+  app.get("/api/blogs/slug/:slug", async (req, res) => {
+    try {
+      const blogPost = await storage.getBlogPostBySlug(req.params.slug);
+      if (!blogPost || blogPost.status !== "published") {
+        return res.status(404).json({ success: false, error: "Blog post not found" });
+      }
+      
+      // Increment view count
+      await storage.updateBlogPost(blogPost.id, { viewCount: (blogPost.viewCount || 0) + 1 });
+      
+      res.json({ success: true, blogPost });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to fetch blog post" });
+    }
+  });
+
+  // =================== ADMIN BLOG ENDPOINTS ===================
+  // (These would normally require authentication)
+  
+  // Get all blog posts including pending ones (admin)
+  app.get("/api/admin/blogs", async (req, res) => {
+    try {
+      const status = req.query.status as string;
+      const blogPosts = await storage.getBlogPosts(status);
+      res.json({ success: true, blogPosts });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to fetch blog posts" });
+    }
+  });
+
+  // Approve blog post (admin)
+  app.put("/api/admin/blogs/:id/approve", async (req, res) => {
+    try {
+      const blogPost = await storage.updateBlogPost(req.params.id, { status: "published" });
+      if (!blogPost) {
+        return res.status(404).json({ success: false, error: "Blog post not found" });
+      }
+      res.json({ success: true, blogPost, message: "Blog post approved and published" });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to approve blog post" });
+    }
+  });
+
+  // Reject blog post (admin)
+  app.put("/api/admin/blogs/:id/reject", async (req, res) => {
+    try {
+      const { reason } = req.body;
+      const blogPost = await storage.updateBlogPost(req.params.id, { 
+        status: "rejected",
+        // Could add rejection reason field to schema later
+      });
+      if (!blogPost) {
+        return res.status(404).json({ success: false, error: "Blog post not found" });
+      }
+      res.json({ success: true, blogPost, message: "Blog post rejected" });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to reject blog post" });
+    }
+  });
+
+  // Update blog post (admin)
+  app.put("/api/admin/blogs/:id", async (req, res) => {
+    try {
+      const updates = req.body;
+      const blogPost = await storage.updateBlogPost(req.params.id, updates);
+      if (!blogPost) {
+        return res.status(404).json({ success: false, error: "Blog post not found" });
+      }
+      res.json({ success: true, blogPost, message: "Blog post updated" });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to update blog post" });
+    }
+  });
+
+  // Delete blog post (admin)
+  app.delete("/api/admin/blogs/:id", async (req, res) => {
+    try {
+      const success = await storage.deleteBlogPost(req.params.id);
+      if (!success) {
+        return res.status(404).json({ success: false, error: "Blog post not found" });
+      }
+      res.json({ success: true, message: "Blog post deleted" });
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Failed to delete blog post" });
     }
   });
 

@@ -16,6 +16,7 @@ export default function Navigation() {
     { name: "About Us", href: "/about" },
     { name: "Our Work", href: "/our-work" },
     { name: "Stories", href: "/stories" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 

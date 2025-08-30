@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type Contact, type InsertContact, type Volunteer, type InsertVolunteer, type Donation, type InsertDonation, type Newsletter, type InsertNewsletter } from "@shared/schema";
+import { type User, type InsertUser, type Contact, type InsertContact, type Volunteer, type InsertVolunteer, type Donation, type InsertDonation, type Newsletter, type InsertNewsletter, type BlogPost, type InsertBlogPost } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -10,6 +10,14 @@ export interface IStorage {
   createDonation(donation: InsertDonation): Promise<Donation>;
   createNewsletter(newsletter: InsertNewsletter): Promise<Newsletter>;
   getNewsletterByEmail(email: string): Promise<Newsletter | undefined>;
+  
+  // Blog operations
+  createBlogPost(blogPost: InsertBlogPost): Promise<BlogPost>;
+  getBlogPosts(status?: string): Promise<BlogPost[]>;
+  getBlogPost(id: string): Promise<BlogPost | undefined>;
+  getBlogPostBySlug(slug: string): Promise<BlogPost | undefined>;
+  updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | undefined>;
+  deleteBlogPost(id: string): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
@@ -18,6 +26,7 @@ export class MemStorage implements IStorage {
   private volunteers: Map<string, Volunteer>;
   private donations: Map<string, Donation>;
   private newsletters: Map<string, Newsletter>;
+  private blogPosts: Map<string, BlogPost>;
 
   constructor() {
     this.users = new Map();
@@ -25,6 +34,7 @@ export class MemStorage implements IStorage {
     this.volunteers = new Map();
     this.donations = new Map();
     this.newsletters = new Map();
+    this.blogPosts = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -60,6 +70,7 @@ export class MemStorage implements IStorage {
     const volunteer: Volunteer = { 
       ...insertVolunteer, 
       id, 
+      skills: insertVolunteer.skills || null,
       createdAt: new Date() 
     };
     this.volunteers.set(id, volunteer);
@@ -71,6 +82,9 @@ export class MemStorage implements IStorage {
     const donation: Donation = { 
       ...insertDonation, 
       id, 
+      isMonthly: insertDonation.isMonthly || false,
+      donorEmail: insertDonation.donorEmail || null,
+      donorName: insertDonation.donorName || null,
       status: "pending",
       createdAt: new Date() 
     };
@@ -94,6 +108,70 @@ export class MemStorage implements IStorage {
     return Array.from(this.newsletters.values()).find(
       (newsletter) => newsletter.email === email,
     );
+  }
+
+  // Blog post operations
+  async createBlogPost(insertBlogPost: InsertBlogPost): Promise<BlogPost> {
+    const id = randomUUID();
+    const slug = this.generateSlug(insertBlogPost.title);
+    const blogPost: BlogPost = {
+      ...insertBlogPost,
+      id,
+      slug,
+      excerpt: insertBlogPost.excerpt || null,
+      category: insertBlogPost.category || "general",
+      featuredImage: insertBlogPost.featuredImage || null,
+      tags: insertBlogPost.tags || null,
+      status: "pending",
+      viewCount: 0,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.blogPosts.set(id, blogPost);
+    return blogPost;
+  }
+
+  async getBlogPosts(status?: string): Promise<BlogPost[]> {
+    const allPosts = Array.from(this.blogPosts.values());
+    if (status) {
+      return allPosts.filter(post => post.status === status);
+    }
+    return allPosts.sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime());
+  }
+
+  async getBlogPost(id: string): Promise<BlogPost | undefined> {
+    return this.blogPosts.get(id);
+  }
+
+  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+    return Array.from(this.blogPosts.values()).find(post => post.slug === slug);
+  }
+
+  async updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | undefined> {
+    const existing = this.blogPosts.get(id);
+    if (!existing) return undefined;
+    
+    const updated: BlogPost = {
+      ...existing,
+      ...updates,
+      updatedAt: new Date(),
+    };
+    this.blogPosts.set(id, updated);
+    return updated;
+  }
+
+  async deleteBlogPost(id: string): Promise<boolean> {
+    return this.blogPosts.delete(id);
+  }
+
+  private generateSlug(title: string): string {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+      + '-' + Date.now();
   }
 }
 
