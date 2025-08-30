@@ -58,7 +58,7 @@ export default function ImageSlideshow() {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
