@@ -114,7 +114,7 @@ export default function ImageSlideshow() {
             <Button
               size="lg"
               variant="outline"
-              className="px-8 py-4 border-2 border-white text-white text-lg font-semibold hover:bg-white hover:text-foreground transition-all duration-500 hover:scale-110 hover:shadow-2xl"
+              className="px-8 py-4 border-2 border-white text-white text-lg font-semibold hover:bg-white hover:text-foreground transition-all duration-500 hover:scale-110 hover:shadow-2xl bg-[#fabd23]"
               data-testid="slideshow-cta-secondary"
             >
               🤝 Volunteer With Us
