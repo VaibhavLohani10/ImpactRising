@@ -23,7 +23,7 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full z-50 glass-effect border-b border-border" data-testid="main-navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center space-x-3" data-testid="logo-link">
+          <Link href="/" className="flex items-center space-x-3 font-normal text-[17px]" data-testid="logo-link">
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-lg">S</span>
             </div>
@@ -81,7 +81,6 @@ export default function Navigation() {
           </button>
         </div>
       </div>
-      
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden" data-testid="mobile-menu">
