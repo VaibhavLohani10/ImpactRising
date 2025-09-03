@@ -94,7 +94,7 @@ export default function ImageSlideshow() {
 
       {/* Overlay content */}
       <div className="relative z-10 min-h-screen flex items-center justify-center">
-        <div className="max-w-7xl mx-auto px-4 py-[100px] sm:px-6 lg:px-8 text-center">
+        <div className="max-w-7xl mx-auto px-4 py-[100px] sm:px-6 lg:px-8 text-center">  --- just changed IGNORE ---
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight animate-fade-in text-shadow" data-testid="slideshow-title">
             {slides[currentSlide].title}
           </h1>
