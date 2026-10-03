@@ -4,6 +4,27 @@ import { storage } from "./storage";
 import { insertContactSchema, insertVolunteerSchema, insertDonationSchema, insertNewsletterSchema, insertBlogPostSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+
+  // Database/storage health check
+  app.get("/api/health/db", async (_req, res) => {
+    try {
+      const healthy = await storage.healthCheck();
+      res.json({
+        ok: healthy,
+        storage: storage.mode,
+        databaseConfigured: storage.mode === "database",
+      });
+    } catch (error) {
+      console.error("Database health check failed:", error);
+      res.status(503).json({
+        ok: false,
+        storage: storage.mode,
+        databaseConfigured: storage.mode === "database",
+        error: "Database connection failed",
+      });
+    }
+  });
+
   // Contact form submission
   app.post("/api/contacts", async (req, res) => {
     try {
@@ -32,13 +53,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertDonationSchema.parse(req.body);
       const donation = await storage.createDonation(validatedData);
       
-      // In a real implementation, you would integrate with Razorpay or similar payment gateway here
-      // For now, we'll just create the donation record
-      
-      res.json({ 
-        success: true, 
+      // UPI payments are completed directly by the donor through their UPI app or QR code.
+      // The server records the donation intent; payment confirmation is not automated in this flow.
+      res.json({
+        success: true,
         donation,
-        paymentUrl: `https://checkout.razorpay.com/v1/checkout.js?amount=${donation.amount * 100}&currency=INR&order_id=${donation.id}`
       });
     } catch (error) {
       res.status(400).json({ success: false, error: "Invalid donation data" });
